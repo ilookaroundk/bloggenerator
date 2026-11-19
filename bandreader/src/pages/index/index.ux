@@ -1,0 +1,53 @@
+<template>
+  <div class="page">
+    <list class="list" scrollbar="false">
+      <list-item type="exit">
+        <div class="exit-wrap" onclick="exitApp">
+          <text class="exit-btn">EXIT</text>
+        </div>
+      </list-item>
+      <list-item for="{{lines}}" type="{{$item.t}}">
+        <text class="{{'t-' + $item.t}}">{{$item.s}}</text>
+      </list-item>
+      <list-item type="exit">
+        <div class="exit-wrap" onclick="exitApp">
+          <text class="exit-btn">EXIT</text>
+        </div>
+      </list-item>
+    </list>
+  </div>
+</template>
+
+<style>
+.page { width: 192px; height: 490px; background-color: #000000; }
+.list { width: 192px; height: 490px; padding: 0px 10px; }
+.exit-wrap { width: 172px; height: 64px; margin: 12px 0px; align-items: center; justify-content: center; background-color: #C62828; border-radius: 32px; }
+.exit-btn { font-size: 24px; font-weight: bold; color: #FFFFFF; }
+.t-h1 { width: 172px; margin-top: 26px; margin-bottom: 8px; font-size: 26px; font-weight: bold; color: #4FC3F7; }
+.t-h2 { width: 172px; margin-top: 20px; margin-bottom: 4px; font-size: 24px; font-weight: bold; color: #FFCA28; }
+.t-p { width: 172px; margin-top: 6px; font-size: 21px; line-height: 28px; color: #FFFFFF; }
+.t-sub { width: 152px; margin-left: 20px; margin-top: 4px; font-size: 20px; line-height: 26px; color: #B0BEC5; }
+.t-tb { width: 172px; margin-top: 12px; font-size: 22px; font-weight: bold; color: #81C784; }
+.t-ts { width: 152px; margin-left: 20px; font-size: 20px; line-height: 26px; color: #CFD8DC; }
+</style>
+
+<script>
+import router from '@system.router'
+import content from '../../common/content.js'
+
+export default {
+  private: { lines: content },
+  exitApp() {
+    // Closes the app. Falls back to router.back() (also exits from the only page).
+    try {
+      if (this.$app && this.$app.exit) { this.$app.exit(); return }
+    } catch (e) {}
+    router.back()
+  },
+  onBackPress() {
+    // Swipe-right / back gesture also exits.
+    this.exitApp()
+    return true
+  }
+}
+</script>

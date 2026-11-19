@@ -1,0 +1,10 @@
+{
+  "name": "bandreader",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "aiot-toolkit build",
+    "release": "aiot-toolkit release"
+  },
+  "devDependencies": { "aiot-toolkit": "^2.0.5" }
+}
